@@ -1,0 +1,18 @@
+programa testeMedia;
+var
+    cont, x, Media : inteiro;
+início
+    cont:=1;
+    Media:=0;
+    enquanto (cont<>5) faca
+    início
+        escrever('Valor ',cont,': ');
+        ler(x);
+        Media := Media + x;
+        cont:=cont+1;
+    fim
+    escrever('Soma dos valores: ');
+    escrever(Media);
+    escrever('Media dos valores: ');
+    escrever(Media/5);
+fim

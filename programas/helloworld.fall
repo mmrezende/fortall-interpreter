@@ -1,0 +1,5 @@
+programa olaMundo;
+início
+    { escreve no terminal a mensagem "Olá mundo!" }
+    escrever('Olá mundo!')
+fim
