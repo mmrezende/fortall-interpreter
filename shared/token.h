@@ -43,6 +43,7 @@ typedef enum {
     INICIO,
     FIM,
     PONTO_E_VIRGULA,
+    VIRGULA,
     DOIS_PONTOS,
     ABRE_PARENTESES,
     FECHA_PARENTESES,

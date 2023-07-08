@@ -28,12 +28,13 @@ programa (P|p)(R|r)(O|o)(G|g)(R|r)(A|a)(M|m)(A|a)
 inicio (I|i)(N|n)(I|i|Í|í)(C|c)(I|i)(O|o)
 fim (F|f)(I|i)(M|m)
 ponto_e_virgula ;
+virgula ,
 dois_pontos :
 abre_parenteses \(
 fecha_parenteses \)
 identificador ({letra}|_)({letra}|{digito}|_)*
-string '.*'
-numero {digito_nao_nulo}+{digito}*
+string '[^']*'
+numero ({digito_nao_nulo}+{digito}*|{digito})
 
 %%
 {inteiro} printf("Encontrei um token do tipo [inteiro]\n") ;
@@ -62,12 +63,13 @@ numero {digito_nao_nulo}+{digito}*
 {inicio} printf("Encontrei um token do tipo [inicio]\n") ;
 {fim} printf("Encontrei um token do tipo [fim]\n") ;
 {ponto_e_virgula} printf("Encontrei um token do tipo [ponto_e_virgula]\n") ;
+{virgula} printf("Encontrei um token do tipo [virgula]\n") ;
 {dois_pontos} printf("Encontrei um token do tipo [dois_pontos]\n") ;
 {abre_parenteses} printf("Encontrei um token do tipo [abre_parenteses]\n") ;
 {fecha_parenteses} printf("Encontrei um token do tipo [fecha_parenteses]\n") ;
-{identificador} printf("Encontrei um token do tipo [identificador]\n") ;
-{string} printf("Encontrei um token do tipo [string]\n") ;
-{numero} printf("Encontrei um token do tipo [numero]\n") ;
+{identificador} printf("Encontrei um token do tipo [identificador] = [%s]\n", yytext) ;
+{string} printf("Encontrei um token do tipo [string] = [%s]\n", yytext) ;
+{numero} printf("Encontrei um token do tipo [numero] = [%s]\n", yytext) ;
 [ \t\n] ;
 . printf("Token inesperado: [%s]\n", yytext);
 %%
