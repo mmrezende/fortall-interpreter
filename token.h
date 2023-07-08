@@ -35,9 +35,21 @@ typedef enum {
     COMENTARIO,
     // atribuições
     ATRIBUICAO,
+    // declaração de variáveis
+    DECLARACAO,
+    // delimitadores
+    PROGRAMA,
+    INICIO,
+    FIM,
+    PONTO_E_VIRGULA,
+    DOIS_PONTOS,
+    ABRE_PARENTESES,
+    FECHA_PARENTESES,
+
     // tokens variáveis (que precisam de uma tabela auxiliar)
     IDENTIFICADOR,
-    CONSTANTE
+    STRING,
+    NUMERO
 } classe_t;
 
 typedef struct {
