@@ -1,5 +1,4 @@
 #include "token.h"
-#include <stdlib.h>
 
 token_t* token_cria() {
     return calloc(1, sizeof(token_t));

@@ -4,6 +4,7 @@
  * Interface que define a estrutura dos tokens
  * e funções auxiliares para manipulá-los
 */
+#include <stdlib.h>
 
 typedef enum {
     // tipos primitivos

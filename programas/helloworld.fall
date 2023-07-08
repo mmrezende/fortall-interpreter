@@ -1,5 +1,6 @@
 programa olaMundo;
 início
+58
     { escreve no terminal a mensagem "Olá mundo!" }
     escrever('Olá mundo!')
 fim
