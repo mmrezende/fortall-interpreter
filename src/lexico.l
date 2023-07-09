@@ -1,3 +1,9 @@
+%{
+    // #include "y.tab.h"
+    #include <stdlib.h>
+    void yyerror(char*);
+%}
+
 letra [A-Za-z]
 digito [0-9]
 digito_nao_nulo [1-9]
@@ -71,6 +77,8 @@ numero ({digito_nao_nulo}+{digito}*|{digito})
 {string} printf("Encontrei um token do tipo [string] = [%s]\n", yytext) ;
 {numero} printf("Encontrei um token do tipo [numero] = [%s]\n", yytext) ;
 [ \t\n] ;
-. printf("Token inesperado: [%s]\n", yytext);
+. yyerror("Caractere desconhecido");
 %%
-#include "token.h"
+int yywrap(void) {
+    return 1;
+}
