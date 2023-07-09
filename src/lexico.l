@@ -143,6 +143,7 @@ digito_nao_nulo [1-9]
     return STRING;
 }
 ({digito_nao_nulo}+{digito}*|{digito}) {
+    yylval = atoi(yytext);
     yycolno += yyleng;
     return NUMERO;
 }

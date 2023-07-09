@@ -69,7 +69,7 @@ c:      IDENTIFICADOR ATRIBUICAO a
         | LER r
         | ESCREVER w
         | m
-        | ENQUANTO ABRE_PARENTESES b FECHA_PARENTESES FACA n { printf("c->enquanto"); }
+        | ENQUANTO ABRE_PARENTESES b FECHA_PARENTESES FACA n
         ;
 a:      e
         | VERDADEIRO
