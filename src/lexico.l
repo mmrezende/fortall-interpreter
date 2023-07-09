@@ -1,82 +1,157 @@
 %{
-    // #include "y.tab.h"
+    #include "y.tab.h"
     #include <stdlib.h>
     void yyerror(char*);
+    int yycolno = 1;
 %}
 
 letra [A-Za-z]
 digito [0-9]
 digito_nao_nulo [1-9]
 
-inteiro (I|i)(N|n)(T|t)(E|e)(I|i)(R|r)(O|o)
-logico (L|l)(O|o|Ó|ó)(G|g)(I|i)(C|c)(O|o)
-ler (L|l)(E|e)(R|r)
-escrever (E|e)(S|s)(C|c)(R|r)(E|e)(V|v)(E|e)(R|r)
-enquanto (E|e)(N|n)(Q|q)(U|u)(A|a)(N|n)(T|t)(O|o)
-faca (F|f)(A|a)(C|c|Ç|ç)(A|a)
-se (S|s)(E|e)
-entao (E|e)(N|n)(T|t)(A|a|Ã|ã)(O|o)
-senao (S|s)(E|e)(N|n)(A|a|Ã|ã)(O|o)
-soma \+
-subtracao -
-multiplicacao \*
-divisao \/
-igual =
-diferente <>
-menor <
-menor_ou_igual <=
-maior >
-maior_ou_igual >=
-comentario \{.*\}
-atribuicao :=
-declaracao (V|v)(A|a)(R|r)
-programa (P|p)(R|r)(O|o)(G|g)(R|r)(A|a)(M|m)(A|a)
-inicio (I|i)(N|n)(I|i|Í|í)(C|c)(I|i)(O|o)
-fim (F|f)(I|i)(M|m)
-ponto_e_virgula ;
-virgula ,
-dois_pontos :
-abre_parenteses \(
-fecha_parenteses \)
-identificador ({letra}|_)({letra}|{digito}|_)*
-string '[^']*'
-numero ({digito_nao_nulo}+{digito}*|{digito})
-
 %%
-{inteiro} printf("Encontrei um token do tipo [inteiro]\n") ;
-{logico} printf("Encontrei um token do tipo [logico]\n") ;
-{ler} printf("Encontrei um token do tipo [ler]\n") ;
-{escrever} printf("Encontrei um token do tipo [escrever]\n") ;
-{enquanto} printf("Encontrei um token do tipo [enquanto]\n") ;
-{faca} printf("Encontrei um token do tipo [faca]\n") ;
-{se} printf("Encontrei um token do tipo [se]\n") ;
-{entao} printf("Encontrei um token do tipo [entao]\n") ;
-{senao} printf("Encontrei um token do tipo [senao]\n") ;
-{soma} printf("Encontrei um token do tipo [soma]\n") ;
-{subtracao} printf("Encontrei um token do tipo [subtracao]\n") ;
-{multiplicacao} printf("Encontrei um token do tipo [multiplicacao]\n") ;
-{divisao} printf("Encontrei um token do tipo [divisao]\n") ;
-{igual} printf("Encontrei um token do tipo [igual]\n") ;
-{diferente} printf("Encontrei um token do tipo [diferente]\n") ;
-{menor} printf("Encontrei um token do tipo [menor]\n") ;
-{menor_ou_igual} printf("Encontrei um token do tipo [menor_ou_igual]\n") ;
-{maior} printf("Encontrei um token do tipo [maior]\n") ;
-{maior_ou_igual} printf("Encontrei um token do tipo [maior_ou_igual]\n") ;
-{comentario} printf("Encontrei um token do tipo [comentario]\n") ;
-{atribuicao} printf("Encontrei um token do tipo [atribuicao]\n") ;
-{declaracao} printf("Encontrei um token do tipo [declaracao]\n") ;
-{programa} printf("Encontrei um token do tipo [programa]\n") ;
-{inicio} printf("Encontrei um token do tipo [inicio]\n") ;
-{fim} printf("Encontrei um token do tipo [fim]\n") ;
-{ponto_e_virgula} printf("Encontrei um token do tipo [ponto_e_virgula]\n") ;
-{virgula} printf("Encontrei um token do tipo [virgula]\n") ;
-{dois_pontos} printf("Encontrei um token do tipo [dois_pontos]\n") ;
-{abre_parenteses} printf("Encontrei um token do tipo [abre_parenteses]\n") ;
-{fecha_parenteses} printf("Encontrei um token do tipo [fecha_parenteses]\n") ;
-{identificador} printf("Encontrei um token do tipo [identificador] = [%s]\n", yytext) ;
-{string} printf("Encontrei um token do tipo [string] = [%s]\n", yytext) ;
-{numero} printf("Encontrei um token do tipo [numero] = [%s]\n", yytext) ;
-[ \t\n] ;
+(I|i)(N|n)(T|t)(E|e)(I|i)(R|r)(O|o) {
+    yycolno += yyleng;
+    return INTEIRO;
+}
+(L|l)(O|o|Ó|ó)(G|g)(I|i)(C|c)(O|o) {
+    yycolno += yyleng;
+    return LOGICO;
+}
+(V|v)(E|e)(R|r)(D|d)(A|a)(D|d)(E|e)(I|i)(R|r)(O|o) {
+    yycolno += yyleng;
+    return VERDADEIRO;
+}
+(F|f)(A|a)(L|l)(S|s)(O|o) {
+    yycolno += yyleng;
+    return FALSO;
+}
+(L|l)(E|e)(R|r) {
+    yycolno += yyleng;
+    return LER;
+}
+(E|e)(S|s)(C|c)(R|r)(E|e)(V|v)(E|e)(R|r) {
+    yycolno += yyleng;
+    return ESCREVER;
+}
+(E|e)(N|n)(Q|q)(U|u)(A|a)(N|n)(T|t)(O|o) {
+    yycolno += yyleng;
+    return ENQUANTO;
+}
+(F|f)(A|a)(C|c|Ç|ç)(A|a) {
+    yycolno += yyleng;
+    return FACA;
+}
+(S|s)(E|e) {
+    yycolno += yyleng;
+    return SE;
+}
+(E|e)(N|n)(T|t)(A|a|Ã|ã)(O|o) {
+    yycolno += yyleng;
+    return ENTAO;
+}
+(S|s)(E|e)(N|n)(A|a|Ã|ã)(O|o) {
+    yycolno += yyleng;
+    return SENAO;
+}
+\+ {
+    yycolno += yyleng;
+    return SOMA;
+}
+- {
+    yycolno += yyleng;
+    return SUBTRACAO;
+}
+\* {
+    yycolno += yyleng;
+    return MULTIPLICACAO;
+}
+\/ {
+    yycolno += yyleng;
+    return DIVISAO;
+}
+= {
+    yycolno += yyleng;
+    return IGUAL;
+}
+\<\> {
+    yycolno += yyleng;
+    return DIFERENTE;
+}
+\< {
+    yycolno += yyleng;
+    return MENOR;
+}
+\<= {
+    yycolno += yyleng;
+    return MENOR_OU_IGUAL;
+}
+\> {
+    yycolno += yyleng;
+    return MAIOR;
+}
+\>= {
+    yycolno += yyleng;
+    return MAIOR_OU_IGUAL;
+}
+:= {
+    yycolno += yyleng;
+    return ATRIBUICAO;
+}
+(V|v)(A|a)(R|r) {
+    yycolno += yyleng;
+    return DECLARACAO;
+}
+(P|p)(R|r)(O|o)(G|g)(R|r)(A|a)(M|m)(A|a) {
+    yycolno += yyleng;
+    return PROGRAMA;
+}
+(I|i)(N|n)(I|i|Í|í)(C|c)(I|i)(O|o) {
+    yycolno += yyleng;
+    return INICIO;
+}
+(F|f)(I|i)(M|m) {
+    yycolno += yyleng;
+    return FIM;
+}
+\; {
+    yycolno += yyleng;
+    return PONTO_E_VIRGULA;
+}
+, {
+    yycolno += yyleng;
+    return VIRGULA;
+}
+: {
+    yycolno += yyleng;
+    return DOIS_PONTOS;
+}
+\( {
+    yycolno += yyleng;
+    return ABRE_PARENTESES;
+}
+\) {
+    yycolno += yyleng;
+    return FECHA_PARENTESES;
+}
+({letra}|_)({letra}|{digito}|_)* {
+    yycolno += yyleng;
+    return IDENTIFICADOR;
+}
+'[^']*' {
+    yycolno += yyleng;
+    return STRING;
+}
+({digito_nao_nulo}+{digito}*|{digito}) {
+    yycolno += yyleng;
+    return NUMERO;
+}
+\{.*\} ; /* comentário */
+[ \t] ;
+\n {
+    yylineno++;
+    yycolno = 1;
+};
 . yyerror("Caractere desconhecido");
 %%
 int yywrap(void) {

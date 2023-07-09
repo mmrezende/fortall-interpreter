@@ -11,7 +11,7 @@ all: $(TARGET_DIR)/analisador
 
 # Run yacc on sintatico.y and output to .c file
 $(TARGET_DIR)/y.tab.c $(TARGET_DIR)/y.tab.h: $(SRC_DIR)/sintatico.y
-	$(YACC) -d -o $@ $<
+	$(YACC) -d -o $@ $< -Wcounterexamples
 
 # Run lex on lexico.l and output to .c file
 $(TARGET_DIR)/lex.yy.c: $(SRC_DIR)/lexico.l
