@@ -1,26 +1,20 @@
 #ifndef _TIPOS_H_
 #define _TIPOS_H_
+#include <stdbool.h>
 
 typedef char* chave_t;
 typedef struct {
-    chave_t variavel;
-    double numero;
+    chave_t chave;
+    bool ehInteiro;
 } valor_t;
 
-typedef enum {OPERADOR, NUMERO, VARIAVEL} TIPOS;
-
-typedef struct {
-    TIPOS tipo;
-    char operador;
-    double numero;
-    chave_t variavel;
-} dado_t;
-
-// Imprime o conteúdo de um dado_t
-void imprime_dado(dado_t dado);
+typedef char* dado_t;
 
 // Imprime o conteúdo de um valor_t
 void imprime_valor(valor_t valor);
+
+// Imprime o conteúdo de um dado_t
+void imprime_dado(dado_t dado);
 
 // Desaloca o conteúdo armazenado num valor_t (caso necessário)
 void libera_valor(valor_t valor);

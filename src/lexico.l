@@ -1,6 +1,9 @@
 %{
-    #include "y.tab.h"
     #include <stdlib.h>
+    #include <stdbool.h>
+    #include <string.h>
+    #include "y.tab.h"
+    
     void yyerror(char*);
     int yycolno = 1;
 %}
@@ -19,10 +22,14 @@ digito_nao_nulo [1-9]
     return LOGICO;
 }
 (V|v)(E|e)(R|r)(D|d)(A|a)(D|d)(E|e)(I|i)(R|r)(O|o) {
+    yylval.expressao.ehInteiro = false;
+    yylval.expressao.boolVal = true;
     yycolno += yyleng;
     return VERDADEIRO;
 }
 (F|f)(A|a)(L|l)(S|s)(O|o) {
+    yylval.expressao.ehInteiro = false;
+    yylval.expressao.boolVal = false;
     yycolno += yyleng;
     return FALSO;
 }
@@ -135,15 +142,23 @@ digito_nao_nulo [1-9]
     return FECHA_PARENTESES;
 }
 ({letra}|_)({letra}|{digito}|_)* {
+    yylval.stringVal = strdup(yytext);
     yycolno += yyleng;
     return IDENTIFICADOR;
 }
 '[^']*' {
+    /* Copia a string removendo as aspas simples */
+    char* conteudo = malloc(yyleng * sizeof(char));
+    strncpy(conteudo, yytext+1, yyleng-2);
+    conteudo[yyleng-1] = '\0';
+
+    yylval.stringVal = conteudo;
     yycolno += yyleng;
     return STRING;
 }
 ({digito_nao_nulo}+{digito}*|{digito}) {
-    yylval = atoi(yytext);
+    yylval.expressao.ehInteiro = true;
+    yylval.expressao.intVal = atoi(yytext);
     yycolno += yyleng;
     return NUMERO;
 }
@@ -153,7 +168,7 @@ digito_nao_nulo [1-9]
     yylineno++;
     yycolno = 1;
 };
-. yyerror("Caractere desconhecido");
+. yyerror("lexical error");
 
 %%
 

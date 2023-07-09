@@ -1,8 +1,10 @@
 programa testeMedia;
 var
     cont, x, Media : inteiro;
+    bool: logico;
 início
-    cont:=1;
+    cont:=VERDADEIRO;
+    cont:=3+bool;
     Media:=0;
     enquanto (cont<>5) faca
     início
@@ -10,9 +12,9 @@ início
         ler(x);
         Media := Media + x;
         cont:=cont+1;
-    fim;
+    fim
     escrever('Soma dos valores: ');
     escrever(Media);
     escrever('Media dos valores: ');
     escrever(Media/5);
-fim
+fim?

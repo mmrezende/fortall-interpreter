@@ -280,7 +280,6 @@ bool edb_busca(edb_t *edb, chave_t chave, valor_t *pvalor) {
     
     if(encontrado == NULL) return false;
 
-    libera_valor(*pvalor); // Necessário liberar o valor antigo
     *pvalor = encontrado->valor;
     return true;
 }
