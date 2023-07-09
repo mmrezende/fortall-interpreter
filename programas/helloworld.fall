@@ -1,4 +1,4 @@
 programa olaMundo;
 início
-
+    escrever('Olá mundo!');
 fim

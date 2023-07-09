@@ -41,7 +41,7 @@
 
 %%
 
-/* Gramática que define a Linguagem */
+/* Gramática que define a linguagem */
 s:      PROGRAMA IDENTIFICADOR PONTO_E_VIRGULA s1
         ;
 s1:     d m
@@ -62,16 +62,14 @@ i:      IDENTIFICADOR i1
 i1:     VIRGULA i
         |
         ;
-l:      n PONTO_E_VIRGULA l1
-        ;
-l1:     l
+l:      n PONTO_E_VIRGULA l
         |
         ;
 c:      IDENTIFICADOR ATRIBUICAO a
         | LER r
         | ESCREVER w
         | m
-        | ENQUANTO ABRE_PARENTESES b FECHA_PARENTESES FACA n
+        | ENQUANTO ABRE_PARENTESES b FECHA_PARENTESES FACA n { printf("c->enquanto"); }
         ;
 a:      e
         | VERDADEIRO
@@ -91,9 +89,7 @@ f1:     VIRGULA f
 g:      STRING
         | e
         ;
-m:      INICIO m1
-        ;
-m1:     l FIM
+m:      INICIO l FIM
         ;
 n:      SE b ENTAO n1
         | c

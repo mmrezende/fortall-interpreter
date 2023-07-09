@@ -10,7 +10,7 @@ início
         ler(x);
         Media := Media + x;
         cont:=cont+1;
-    fim
+    fim;
     escrever('Soma dos valores: ');
     escrever(Media);
     escrever('Media dos valores: ');

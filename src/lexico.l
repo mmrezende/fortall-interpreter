@@ -153,7 +153,9 @@ digito_nao_nulo [1-9]
     yycolno = 1;
 };
 . yyerror("Caractere desconhecido");
+
 %%
+
 int yywrap(void) {
     return 1;
 }
