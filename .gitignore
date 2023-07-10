@@ -1,3 +1,5 @@
 targets/*
 !targets/.gitkeep
 .vscode/
+input.txt
+output.txt

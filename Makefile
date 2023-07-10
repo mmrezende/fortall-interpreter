@@ -29,7 +29,7 @@ $(TARGET_DIR)/lex.yy.c: $(SRC_DIR)/lexico.l
 
 # Link everything
 $(TARGET_DIR)/analisador: $(TARGET_DIR)/y.tab.c $(TARGET_DIR)/lex.yy.c $(O_FILES)
-	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
+	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS) && touch input.txt && touch output.txt
 
 
 clean:

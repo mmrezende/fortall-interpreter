@@ -150,7 +150,7 @@ digito_nao_nulo [1-9]
     /* Copia a string removendo as aspas simples */
     char* conteudo = malloc(yyleng * sizeof(char));
     strncpy(conteudo, yytext+1, yyleng-2);
-    conteudo[yyleng-1] = '\0';
+    conteudo[yyleng-2] = '\0';
 
     yylval.stringVal = conteudo;
     yycolno += yyleng;

@@ -5,6 +5,8 @@
 typedef char* chave_t;
 typedef struct {
     chave_t chave;
+    int intVal;
+    bool boolVal;
     bool ehInteiro;
 } valor_t;
 

@@ -7,9 +7,9 @@
 // Imprime o conteúdo de um valor_t
 void imprime_valor(valor_t valor) {
     if(valor.ehInteiro) {
-        printf("[%s, Inteiro]\n", valor.chave);
+        printf("[%s, Inteiro, %d]\n", valor.chave, valor.intVal);
     } else {
-        printf("[%s, Inteiro]\n", valor.chave);
+        printf("[%s, Lógico, %d]\n", valor.chave, valor.boolVal);
     }
     
 }
